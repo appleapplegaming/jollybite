@@ -20,7 +20,6 @@ app.get("/menu.pdf", async (c) => {
     const headers = new Headers();
     object.writeHttpMetadata(headers);
     headers.set("etag", object.httpEtag);
-
     return new Response(object.body, {
       headers,
     });
