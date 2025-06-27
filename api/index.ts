@@ -7,22 +7,24 @@ app.get("/admin", (c) => {
   return c.text("Hono!!");
 });
 
-// Add endpoint to serve menu PDF from R2 bucket
 app.get("/menu.pdf", async (c) => {
   try {
-    // Get the PDF from R2 bucket
     const object = await c.env.jollybite_bucket.get("menu.pdf");
 
     if (!object) {
       return c.text("Menu PDF not found", 404);
     }
 
+    // Convert the stream to array buffer to ensure proper handling
+    const arrayBuffer = await object.arrayBuffer();
+
     // Return the PDF with proper headers
-    return new Response(object.body, {
+    return new Response(arrayBuffer, {
       headers: {
         "Content-Type": "application/pdf",
         "Content-Disposition": "attachment; filename=menu.pdf",
         "Cache-Control": "public, max-age=3600", // Cache for 1 hour
+        "Content-Length": arrayBuffer.byteLength.toString(),
       },
     });
   } catch (error) {
