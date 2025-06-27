@@ -21,6 +21,12 @@
       "bucket_name": "jollybite",
       "preview_bucket_name": "jollybite-preview"
     }
+  ],
+  "routes": [
+    {
+      "pattern": "jollybite.nl",
+      "custom_domain": true
+    }
   ]
   /**
    * Smart Placement
