@@ -16,17 +16,23 @@ app.get("/menu.pdf", async (c) => {
     }
 
     // Convert the stream to array buffer to ensure proper handling
-    const arrayBuffer = await object.arrayBuffer();
+    // const arrayBuffer = await object.arrayBuffer();
+    const headers = new Headers();
+    object.writeHttpMetadata(headers);
+    headers.set("etag", object.httpEtag);
 
-    // Return the PDF with proper headers
-    return new Response(arrayBuffer, {
-      headers: {
-        "Content-Type": "application/pdf",
-        "Content-Disposition": "attachment; filename=menu.pdf",
-        // "Cache-Control": "public, max-age=3600", // Cache for 1 hour
-        // "Content-Length": arrayBuffer.byteLength.toString(),
-      },
+    return new Response(object.body, {
+      headers,
     });
+    // // Return the PDF with proper headers
+    // return new Response(arrayBuffer, {
+    //   headers: {
+    //     "Content-Type": "application/pdf",
+    //     "Content-Disposition": "attachment; filename=menu.pdf",
+    //     // "Cache-Control": "public, max-age=3600", // Cache for 1 hour
+    //     // "Content-Length": arrayBuffer.byteLength.toString(),
+    //   },
+    // });
   } catch (error) {
     console.error("Error fetching menu PDF:", error);
     return c.text("Error fetching menu PDF", 500);
