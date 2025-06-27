@@ -11,6 +11,7 @@ app.get("/menu.pdf", async (c) => {
   try {
     const object = await c.env.jollybite_bucket.get("menu.pdf");
 
+    // test
     if (!object) {
       return c.text("Menu PDF not found", 404);
     }
