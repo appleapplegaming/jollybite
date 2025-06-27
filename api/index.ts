@@ -3,13 +3,12 @@ const app = new Hono<{ Bindings: Env }>();
 console.log("init hono");
 
 app.get("/admin", (c) => {
-  // c.env.jollybite_bucket.get;
   return c.text("Hono!!");
 });
 
 app.get("/menu.pdf", async (c) => {
   try {
-    const object = await c.env.jollybite_bucket.get("menu.pdf");
+    const object = await c.env.jollybite.get("menu.pdf");
 
     // test
     if (!object) {

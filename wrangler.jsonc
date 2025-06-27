@@ -17,8 +17,12 @@
   },
   "r2_buckets": [
     {
-      "binding": "jollybite_bucket",
+      "binding": "jollybite",
       "bucket_name": "jollybite"
+    },
+    {
+      "bucket_name": "jollybite-preview",
+      "binding": "jollybite_preview"
     }
   ]
   /**
