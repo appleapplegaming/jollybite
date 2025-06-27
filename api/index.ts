@@ -24,11 +24,11 @@ app.all("/menu.pdf", async (c) => {
 
     console.log("ArrayBuffer size:", arrayBuffer.byteLength, "bytes");
 
-    // Return the PDF with proper headers
+    // Return the PDF with proper headers for inline viewing
     return new Response(arrayBuffer, {
       headers: {
         "Content-Type": "application/pdf",
-        "Content-Disposition": "attachment; filename=menu.pdf",
+        "Content-Disposition": "inline; filename=menu.pdf",
         "Cache-Control": "public, max-age=3600",
         "Content-Length": arrayBuffer.byteLength.toString(),
       },
