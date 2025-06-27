@@ -11,6 +11,7 @@
     "cf-typegen": "wrangler types"
   },
   "dependencies": {
+    "@astrojs/cloudflare": "^12.6.0",
     "@tailwindcss/vite": "^4.1.11",
     "astro": "^5.10.1",
     "hono": "^4.8.3",
