@@ -10,7 +10,6 @@
   "compatibility_flags": ["nodejs_compat", "global_fetch_strictly_public"],
   "assets": {
     "directory": "./dist"
-    // "not_found_handling": "single-page-application"
   },
   "observability": {
     "enabled": true
@@ -24,8 +23,8 @@
   ],
   "routes": [
     {
-      "pattern": "jollybite.nl",
-      "custom_domain": true
+      "pattern": "jollybite.nl/*",
+      "zone_name": "jollybite.nl"
     }
   ]
   /**

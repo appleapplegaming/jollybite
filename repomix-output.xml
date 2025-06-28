@@ -58,12 +58,10 @@ src/
     Layout.astro
   pages/
     index.astro
-    menu.pdf.ts
   styles/
     global.css
 .gitignore
 astro.config.mjs
-MENU_SETUP.md
 package.json
 pnpm-workspace.yaml
 README.md
@@ -313,60 +311,8 @@ import background from '../assets/background.svg';
 </style>
 </file>
 
-<file path="src/pages/menu.pdf.ts">
-import type { APIRoute } from 'astro';
-import { readFile } from 'fs/promises';
-import { join } from 'path';
-⋮----
-export const GET: APIRoute = async (
-⋮----
-// In development, try to serve from public directory
-⋮----
-// Try to read from public/menu.pdf
-⋮----
-// File doesn't exist in public directory
-⋮----
-// In production, this won't be reached as the worker handles it directly
-</file>
-
 <file path="src/styles/global.css">
 @theme {
-</file>
-
-<file path="MENU_SETUP.md">
-# Menu PDF Setup Instructions
-
-## For Development (localhost)
-
-1. Place your menu PDF file in the `public/` directory as `menu.pdf`
-2. The download button will serve this file during development
-
-## For Production (Cloudflare Workers)
-
-1. Upload your menu PDF to your Cloudflare R2 bucket named "jollybite"
-2. The file should be named `menu.pdf` in the bucket root
-3. The download button will automatically serve from R2 when deployed
-
-## How to upload to R2 bucket
-
-### Option 1: Using Wrangler CLI
-
-```bash
-# Upload the file to your R2 bucket
-npx wrangler r2 object put jollybite/menu.pdf --file=./public/menu.pdf --remote
-```
-
-### Option 2: Using Cloudflare Dashboard
-
-1. Go to Cloudflare Dashboard > R2 Object Storage
-2. Select your "jollybite" bucket
-3. Upload `menu.pdf` to the root of the bucket
-
-## How it works
-
-- **Development**: Serves from `public/menu.pdf`
-- **Production**: Serves from R2 bucket via the Hono API endpoint `/menu.pdf`
-- The download button on your homepage will work in both environments
 </file>
 
 <file path="pnpm-workspace.yaml">
@@ -423,133 +369,6 @@ All commands are run from the root of the project, from a terminal:
 ## 👀 Want to learn more?
 
 Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
-</file>
-
-<file path="src/components/Homepage.astro">
----
-import { Image } from 'astro:assets';
-import logoImage from '../assets/logo.png';
----
-
-<!-- Hero Section -->
-<div class="bg-white h-35 border-b-5 border-black sticky top-0">
-    <div class="flex items-center justify-between px-6 py-4">
-        <!-- Logo -->
-        <div class="flex items-center gap-4">
-            <Image src={logoImage} alt="JollyBite Logo" class="w-28 h-26" />
-            <div class="flex flex-col">
-            </div>
-        </div>
-        
-        <!-- Phone Number -->
-        <div class="flex items-start flex-col text-orange-700">
-            <span class="text-black font-bold text-lg">Bestellen:</span>
-            <div class="flex flex-row gap-2 items-center">            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-            </svg>
-            <span class="text-lg font-semibold">06 12345678</span></div>
-        </div>
-    </div>
-</div>
-
-<!-- Welcome Section -->
-<section class="py-16 bg-jolly-orange ">
-    <div class="max-w-4xl mx-auto px-6 text-center">
-        <h2 class="text-4xl font-bold text-white text-shadow-2xs mb-6">Welkom naar <span class="text-yellow-300">JollyBite</span> restaurant</h2>
-        <p class="text-xl text-white  text-shadow-black">
-            Het beste Syrische restaurant in 
-        </p>
-    </div>
-</section>
-
-<!-- Menu Download Section -->
-<section class="py-16 bg-gray-50">
-    <div class="max-w-4xl mx-auto px-6 text-center">
-        <h2 class="text-4xl font-bold text-gray-800 mb-8">Onze Menu</h2>
-        <p class="text-lg text-gray-600 mb-8">
-            Ontdek onze lekkere authentieke Syrische gerechten
-        </p>
-        <div class="flex flex-col sm:flex-row gap-4 justify-center">
-            <a 
-                href="/menu.pdf" 
-                download 
-                class="bg-jolly-orange text-white px-8 py-4 rounded-lg font-semibold hover:opacity-90 transition-opacity duration-200 inline-flex items-center justify-center gap-2"
-            >
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                </svg>
-                Download Menu (PDF)
-            </a>
-        </div>
-    </div>
-</section>
-
-<!-- Contact Information Section -->
-<section class="py-16 bg-white">
-    <div class="max-w-6xl mx-auto px-6">
-        <h2 class="text-4xl font-bold text-center text-gray-800 mb-12">Contact</h2>
-        
-        <!-- Contact Details in responsive grid -->
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-8">
-            <div class="flex items-start gap-4">
-                <div class="bg-jolly-orange p-3 rounded-full">
-                    <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                    </svg>
-                </div>
-                <div>
-                    <h3 class="text-xl font-semibold text-gray-800 mb-2">Address</h3>
-                    <p class="text-gray-600">
-                        123 Culinary Street<br>
-                        Downtown District<br>
-                        City, State 12345
-                    </p>
-                </div>
-            </div>
-
-            <div class="flex items-start gap-4">
-                <div class="bg-jolly-orange p-3 rounded-full">
-                    <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-                    </svg>
-                </div>
-                <div>
-                    <h3 class="text-xl font-semibold text-gray-800 mb-2">Phone</h3>
-                    <p class="text-gray-600">(555) 123-4567</p>
-                </div>
-            </div>
-
-            <div class="flex items-start gap-4">
-                <div class="bg-jolly-orange p-3 rounded-full">
-                    <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                    </svg>
-                </div>
-                <div>
-                    <h3 class="text-xl font-semibold text-gray-800 mb-2">Email</h3>
-                    <p class="text-gray-600">info@jollybite.com</p>
-                </div>
-            </div>
-
-            <div class="flex items-start gap-4">
-                <div class="bg-jolly-orange p-3 rounded-full">
-                    <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
-                </div>
-                <div>
-                    <h3 class="text-xl font-semibold text-gray-800 mb-2">Hours</h3>
-                    <div class="text-gray-600 space-y-1">
-                        <p>Monday - Thursday: 11:00 AM - 10:00 PM</p>
-                        <p>Friday - Saturday: 11:00 AM - 11:00 PM</p>
-                        <p>Sunday: 12:00 PM - 9:00 PM</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
 </file>
 
 <file path="src/pages/index.astro">
@@ -615,13 +434,41 @@ pnpm-debug.log*
 }
 </file>
 
+<file path="src/layouts/Layout.astro">
+---
+import '../styles/global.css'
+---
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.png" />
+		<meta name="generator" content={Astro.generator} />
+		<title>Jolly Bite Restaurant</title>
+	</head>
+	<body>
+		<slot />
+	</body>
+</html>
+
+<style>
+	html,
+	body {
+		margin: 0;
+		width: 100%;
+		height: 100%;
+	}
+</style>
+</file>
+
 <file path="worker-configuration.d.ts">
 /* eslint-disable */
-// Generated by Wrangler by running `wrangler types` (hash: bfa7ae08b725e8f3c6465de11382a8bf)
+// Generated by Wrangler by running `wrangler types` (hash: 5bd3577c4c4df849e502d78d5fce43a3)
 // Runtime types generated with workerd@1.20250617.0 2025-06-27 global_fetch_strictly_public,nodejs_compat
 ⋮----
 interface Env {
-		jollybite_bucket: R2Bucket;
+		jollybite: R2Bucket;
 	}
 ⋮----
 interface Env extends Cloudflare.Env {}
@@ -11150,32 +10997,44 @@ public sendEvent({ type, payload, }: {
     }): Promise<void>;
 </file>
 
-<file path="src/layouts/Layout.astro">
----
-import '../styles/global.css'
----
-<!doctype html>
-<html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.png" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Jolly Bites Restaurant</title>
-	</head>
-	<body>
-		<slot />
-	</body>
-</html>
+<file path="package.json">
+{
+  "name": "jollybite",
+  "type": "module",
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro build && wrangler dev",
+    "astro": "astro",
+    "deploy": "npx wrangler deploy",
+    "cf-typegen": "wrangler types"
+  },
+  "dependencies": {
+    "@astrojs/cloudflare": "^12.6.0",
+    "@tailwindcss/vite": "^4.1.11",
+    "astro": "^5.10.1",
+    "hono": "^4.8.3",
+    "tailwindcss": "^4.1.11"
+  },
+  "packageManager": "pnpm@10.9.0+sha512.0486e394640d3c1fb3c9d43d49cf92879ff74f8516959c235308f5a8f62e2e19528a65cdc2a3058f587cde71eba3d5b56327c8c33a97e4c4051ca48a10ca2d5f",
+  "devDependencies": {
+    "@cloudflare/vite-plugin": "^1.7.5",
+    "@types/node": "^24.0.5",
+    "wrangler": "^4.22.0"
+  }
+}
+</file>
 
-<style>
-	html,
-	body {
-		margin: 0;
-		width: 100%;
-		height: 100%;
-	}
-</style>
+<file path="astro.config.mjs">
+// @ts-check
+⋮----
+// https://astro.build/config
+export default defineConfig({
+⋮----
+service: passthroughImageService(),
+⋮----
+plugins: [tailwindcss(), cloudflare()],
 </file>
 
 <file path="wrangler.jsonc">
@@ -11190,16 +11049,27 @@ import '../styles/global.css'
   "compatibility_date": "2025-06-27",
   "compatibility_flags": ["nodejs_compat", "global_fetch_strictly_public"],
   "assets": {
-    "directory": "./dist",
-    "not_found_handling": "single-page-application"
+    "directory": "./dist"
+    // "not_found_handling": "single-page-application"
   },
   "observability": {
     "enabled": true
   },
   "r2_buckets": [
     {
-      "binding": "jollybite_bucket",
-      "bucket_name": "jollybite"
+      "binding": "jollybite",
+      "bucket_name": "jollybite",
+      "preview_bucket_name": "jollybite-preview"
+    }
+  ],
+  "routes": [
+    {
+      "pattern": "jollybite.nl",
+      "custom_domain": true
+    },
+    {
+      "pattern": "admin.jollybite.nl",
+      "custom_domain": true
     }
   ]
   /**
@@ -11239,58 +11109,137 @@ import '../styles/global.css'
 }
 </file>
 
+<file path="src/components/Homepage.astro">
+---
+import { Image } from 'astro:assets';
+import logoImage from '../assets/logo.png';
+
+const menuPdfUrl = "https://jollybite.nl/menu.pdf";
+---
+
+<!-- Hero Section -->
+<div class="bg-white h-35 border-b-5 border-black sticky top-0">
+    <div class="flex items-center justify-between px-6 py-4">
+        <!-- Logo -->
+        <div class="flex items-center gap-4">
+            <Image src={logoImage} alt="JollyBite Logo" class="w-28 h-26" />
+            <div class="flex flex-col">
+            </div>
+        </div>
+        
+        <!-- Phone Number -->
+        <div class="flex items-start flex-col text-orange-700">
+            <span class="text-black font-bold text-lg">Bestellen:</span>
+            <div class="flex flex-row gap-2 items-center">            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+            </svg>
+            <span class="text-lg font-semibold">06 12345678</span></div>
+        </div>
+    </div>
+</div>
+
+<!-- Welcome Section -->
+<section class="py-16 bg-jolly-orange ">
+    <div class="max-w-4xl mx-auto px-6 text-center">
+        <h2 class="text-4xl font-bold text-white text-shadow-2xs mb-6">Welkom bij <span class="text-yellow-300">JollyBite</span></h2>
+        <p class="text-xl text-white  text-shadow-black">
+            Het beste Syrische restaurant in Oss
+        </p>
+    </div>
+</section>
+
+<!-- Menu Download Section -->
+<section class="py-16 bg-gray-50">
+    <div class="max-w-4xl mx-auto px-6 text-center">
+        <h2 class="text-4xl font-bold text-gray-800 mb-8">Onze Menu</h2>
+        <p class="text-lg text-gray-600 mb-8">
+            Ontdek onze lekkere authentieke Syrische gerechten
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+            <a 
+                href={menuPdfUrl}
+                target="_blank"
+                class="bg-jolly-orange text-white px-8 py-4 rounded-lg font-semibold hover:opacity-90 transition-opacity duration-200 inline-flex items-center justify-center gap-2"
+            >
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                </svg>
+                View Menu (PDF) 
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- Contact Information Section -->
+<section class="py-16 bg-white">
+    <div class="max-w-6xl mx-auto px-6">
+        <h2 class="text-4xl font-bold text-center text-gray-800 mb-12">Contact</h2>
+        
+        <!-- Contact Details in responsive grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-8">
+            <div class="flex items-start gap-4">
+                <div class="bg-jolly-orange p-3 rounded-full">
+                    <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                    </svg>
+                </div>
+                <div>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-2">Address</h3>
+                    <p class="text-gray-600">
+                        123 Culinary Street<br>
+                        Downtown District<br>
+                        City, State 12345
+                    </p>
+                </div>
+            </div>
+
+            <div class="flex items-start gap-4">
+                <div class="bg-jolly-orange p-3 rounded-full">
+                    <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                    </svg>
+                </div>
+                <div>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-2">Phone</h3>
+                    <p class="text-gray-600">(555) 123-4567</p>
+                </div>
+            </div>
+
+            <div class="flex items-start gap-4">
+                <div class="bg-jolly-orange p-3 rounded-full">
+                    <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                    </svg>
+                </div>
+                <div>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-2">Email</h3>
+                    <p class="text-gray-600">info@jollybite.com</p>
+                </div>
+            </div>
+
+            <div class="flex items-start gap-4">
+                <div class="bg-jolly-orange p-3 rounded-full">
+                    <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                </div>
+                <div>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-2">Hours</h3>
+                    <div class="text-gray-600 space-y-1">
+                        <p>Monday - Thursday: 11:00 AM - 10:00 PM</p>
+                        <p>Friday - Saturday: 11:00 AM - 11:00 PM</p>
+                        <p>Sunday: 12:00 PM - 9:00 PM</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+</file>
+
 <file path="api/index.ts">
 import { Hono } from "hono";
-⋮----
-// c.env.jollybite_bucket.get;
-⋮----
-// test
-⋮----
-// Convert the stream to array buffer to ensure proper handling
-⋮----
-// Return the PDF with proper headers
-⋮----
-"Cache-Control": "public, max-age=3600", // Cache for 1 hour
-</file>
-
-<file path="package.json">
-{
-  "name": "jollybite",
-  "type": "module",
-  "version": "0.0.1",
-  "scripts": {
-    "dev": "astro dev",
-    "build": "astro build",
-    "preview": "astro build && wrangler dev",
-    "astro": "astro",
-    "deploy": "npx wrangler deploy",
-    "cf-typegen": "wrangler types"
-  },
-  "dependencies": {
-    "@astrojs/cloudflare": "^12.6.0",
-    "@tailwindcss/vite": "^4.1.11",
-    "astro": "^5.10.1",
-    "hono": "^4.8.3",
-    "tailwindcss": "^4.1.11"
-  },
-  "packageManager": "pnpm@10.9.0+sha512.0486e394640d3c1fb3c9d43d49cf92879ff74f8516959c235308f5a8f62e2e19528a65cdc2a3058f587cde71eba3d5b56327c8c33a97e4c4051ca48a10ca2d5f",
-  "devDependencies": {
-    "@cloudflare/vite-plugin": "^1.7.5",
-    "@types/node": "^24.0.5",
-    "wrangler": "^4.22.0"
-  }
-}
-</file>
-
-<file path="astro.config.mjs">
-// @ts-check
-⋮----
-// https://astro.build/config
-export default defineConfig({
-⋮----
-service: passthroughImageService(),
-⋮----
-plugins: [tailwindcss(), cloudflare()],
 </file>
 
 </files>
