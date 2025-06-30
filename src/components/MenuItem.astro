@@ -1,0 +1,66 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  price: number;
+  imageUrl?: string;
+  isPopular?: boolean;
+  isVegetarian?: boolean;
+}
+
+const { title, description, price, imageUrl, isPopular = false, isVegetarian = false } = Astro.props;
+---
+
+<div class="bg-white rounded-2xl shadow-lg overflow-hidden max-w-md mx-auto">
+  <!-- Image Section with Popular Badge -->
+  <div class="relative h-48 bg-gray-100 flex items-center justify-center">
+    {imageUrl ? (
+      <img src={imageUrl} alt={title} class="w-full h-full object-cover" />
+    ) : (
+      <!-- Placeholder icon -->
+      <svg class="w-16 h-16 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+      </svg>
+    )}
+    
+    <!-- Popular Badge -->
+    {isPopular && (
+      <div class="absolute top-4 left-4">
+        <span class="bg-red-500 text-white px-3 py-1 rounded-full text-sm font-medium flex items-center gap-1">
+          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+          </svg>
+          Meest verkocht
+        </span>
+      </div>
+    )}
+    
+    <!-- Vegetarian Badge -->
+    {isVegetarian && (
+      <div class={`absolute top-4 ${isPopular ? 'left-24' : 'left-4'}`}>
+        <span class="bg-green-500 text-white px-3 py-1 rounded-full text-sm font-medium flex items-center gap-1">
+          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+            <path d="M12.075 10.812L8.813 7.55l-.938.937 3.263 3.263-3.263 3.263.938.937 3.262-3.263 3.263 3.263.937-.937-3.263-3.263 3.263-3.263-.937-.937-3.263 3.263z"/>
+            <path d="M10 2C14.411 2 18 5.589 18 10S14.411 18 10 18 2 14.411 2 10 5.589 2 10 2M10 4C6.691 4 4 6.691 4 10S6.691 16 10 16 16 13.309 16 10 13.309 4 10 4Z"/>
+          </svg>
+          Vegetarisch
+        </span>
+      </div>
+    )}
+    
+  </div>
+
+  <!-- Content Section -->
+  <div class="p-6">
+    <!-- Title and Price -->
+    <div class="flex justify-between items-start mb-3">
+      <h3 class="text-xl font-bold text-gray-800">{title}</h3>
+      <span class="text-xl font-bold text-jolly-orange">€{price.toFixed(2)}</span>
+    </div>
+
+    <!-- Description -->
+    <p class="text-gray-600 text-sm leading-relaxed mb-6">
+      {description}
+    </p>
+  </div>
+</div>

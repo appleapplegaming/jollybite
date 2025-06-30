@@ -7,9 +7,9 @@ app.get("/admin", (c) => {
 });
 
 // Only serve specific R2 files, not catch-all
-app.get("/menu.pdf", async (c) => {
+app.get("/menu.jpeg", async (c) => {
   try {
-    const object = await c.env.jollybite.get("menu.pdf");
+    const object = await c.env.jollybite.get("menu.jpeg");
 
     if (!object) {
       return c.notFound();
@@ -17,8 +17,8 @@ app.get("/menu.pdf", async (c) => {
 
     // Set appropriate headers
     const headers = new Headers();
-    headers.set("Content-Type", "application/pdf");
-    headers.set("Content-Disposition", 'inline; filename="menu.pdf"');
+    headers.set("Content-Type", "image/jpeg");
+    headers.set("Content-Disposition", 'inline; filename="menu.jpeg"');
 
     // Additional headers to encourage inline viewing
     headers.set("X-Content-Type-Options", "nosniff");

@@ -1,8 +1,9 @@
 ---
 import { Image } from 'astro:assets';
 import logoImage from '../assets/logo.png';
+import MenuItem from '/Users/mustafa/Documents/School/JollyBite2/jollybite/src/components/MenuItem.astro';
 
-const menuPdfUrl = "https://jollybite.nl/menu.pdf";
+const menuUrl = "https://jollybite.nl/menu.jpeg";
 ---
 
 <!-- Hero Section -->
@@ -54,7 +55,7 @@ const menuPdfUrl = "https://jollybite.nl/menu.pdf";
             </p>
             
             <!-- Date and time highlight -->
-            <div class="bg-gradient-to-r from-jolly-orange to-orange-600 rounded-xl p-6 md:p-8 mb-6 shadow-lg">
+            <div class="bg-orange-600 rounded-xl p-6 md:p-8 mb-6 shadow-lg">
                 <div class="text-white text-center">
                     <p class="text-3xl md:text-4xl font-bold mb-2 drop-shadow-md">
                         Zaterdag 5 Juli
@@ -87,25 +88,46 @@ const menuPdfUrl = "https://jollybite.nl/menu.pdf";
     </div>
 </section>
 
-<!-- Menu Download Section -->
+<!-- Mead Section -->
 <section class="py-16 bg-gray-50">
     <div class="max-w-4xl mx-auto px-6 text-center">
         <h2 class="text-4xl font-bold text-gray-800 mb-8">Ons Menu</h2>
         <p class="text-lg text-gray-600 mb-8">
             Ontdek onze lekkere authentieke Syrische gerechten
         </p>
-        <div class="flex flex-col sm:flex-row gap-4 justify-center">
-            <a 
-                href={menuPdfUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                class="bg-jolly-orange text-white px-8 py-4 rounded-lg font-semibold hover:opacity-90 transition-opacity duration-200 inline-flex items-center justify-center gap-2"
-            >
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                </svg>
-                View Menu
-            </a>
+        <div class="flex flex-col gap-8">
+            <!-- Menu Items -->
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <MenuItem 
+                title="Broodje Shoarma"
+                description="Malse gemarineerde kippenvlees met knoflooksaus en augurken"
+                price={6}
+                isPopular={true}
+                imageUrl="https://static.vecteezy.com/ti/gratis-fotos/p2/30516901-rustiek-shoarma-met-frans-patat-paddestoelen-kip-in-pita-brood-foto.jpg"
+                />
+                <MenuItem 
+                title="Broodje Falafel"
+                description="Heerlijke broodje falafel met verse salade, augurken en tahinisaus"
+                price={6}
+                isVegetarian={true}
+                imageUrl="https://tastythriftytimely.com/wp-content/uploads/2023/06/Falafel-Pita-FEATURED.jpg"
+                />
+            </div>
+            
+            <!-- Menu Button -->
+            <div class="flex justify-center">
+                <a 
+                    href={menuUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="bg-jolly-orange text-white px-8 py-4 rounded-2xl font-semibold hover:opacity-90 transition-opacity duration-200 inline-flex items-center justify-center gap-2 shadow-lg"
+                >
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                    </svg>
+                    Bekijk Menu
+                </a>
+            </div>
         </div>
     </div>
 </section>
