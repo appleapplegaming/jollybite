@@ -2,24 +2,6 @@
 
 This directory should contain video files for menu items displayed on the homepage.
 
-## Required Videos
-
-### shoarma.mp4
-Video showcasing the Broodje Shoarma dish. Should be:
-- Short duration (5-15 seconds)
-- High quality but optimized for web
-- Shows the preparation or final presentation of shawarma
-- Recommended dimensions: 640x480 or similar aspect ratio
-- Format: MP4 (H.264 codec recommended)
-
-### falafel.mp4
-Video showcasing the Broodje Falafel dish. Should be:
-- Short duration (5-15 seconds)
-- High quality but optimized for web
-- Shows the preparation or final presentation of falafel
-- Recommended dimensions: 640x480 or similar aspect ratio
-- Format: MP4 (H.264 codec recommended)
-
 ## Video Guidelines
 
 1. **File Size**: Keep videos under 5MB each for fast loading
