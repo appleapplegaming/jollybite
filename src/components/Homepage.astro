@@ -28,60 +28,93 @@ const menuUrl = "/menu.pdf";
 </div>
 
 <!-- Welcome Section -->
-<section class="py-15 bg-jolly-orange relative overflow-hidden">
+<section class="py-15 bg-gradient-to-br from-jolly-orange via-orange-600 to-orange-700 relative overflow-hidden">
     <!-- Background decoration -->
     <div class="absolute inset-0 opacity-10">
         <div class="absolute top-10 left-10 w-32 h-32 bg-yellow-300 rounded-full blur-3xl"></div>
         <div class="absolute bottom-10 right-10 w-40 h-40 bg-white rounded-full blur-3xl"></div>
+        <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-yellow-200 rounded-full blur-3xl"></div>
     </div>
     
     <div class="max-w-5xl mx-auto px-6 text-center relative z-10">
         <!-- Main heading -->
-        <h2 class="text-5xl md:text-6xl font-bold text-white mb-8 leading-tight">
+        <h1 class="text-5xl md:text-6xl font-bold text-white mb-6 leading-tight">
             <span class="text-white drop-shadow-lg">JollyBite</span>
-            <br>
-            <span class="text-3xl md:text-4xl font-semibold text-yellow-100">gaat open!</span>
-        </h2>
+        </h1>
         
         <!-- Restaurant description -->
-        <p class="text-2xl md:text-3xl text-white font-light mb-12 leading-relaxed drop-shadow-md">
+        <p class="text-2xl md:text-3xl text-white font-light mb-8 leading-relaxed drop-shadow-md">
             Een nieuw Syrisch restaurant in Oss
         </p>
         
-        <!-- Opening event card -->
-        <div class="bg-white rounded-2xl shadow-2xl p-8 md:p-12 max-w-3xl mx-auto mb-8">
-            <p class="text-xl md:text-2xl text-gray-700 font-medium mb-6">
-                Kom proeven tijdens de opening op
-            </p>
+        <!-- Welcome message card -->
+        <div class="bg-white/95 backdrop-blur rounded-2xl shadow-2xl p-8 md:p-12 max-w-3xl mx-auto mb-8">
+            <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-6">
+                Welkom bij JollyBite!
+            </h2>
             
-            <!-- Date and time highlight -->
-            <div class="bg-orange-600 rounded-xl p-6 md:p-8 mb-6 shadow-lg">
-                <div class="text-white text-center">
-                    <p class="text-3xl md:text-4xl font-bold mb-2 drop-shadow-md">
-                        Zaterdag 5 Juli
-                    </p>
-                    <p class="text-2xl md:text-3xl font-semibold drop-shadow-md">
-                        12:00 uur
-                    </p>
-                </div>
+            <div class="space-y-4 text-lg md:text-xl text-gray-700 mb-8">
+                <p class="flex items-center justify-center gap-3">
+                    <svg class="w-6 h-6 text-jolly-orange flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z"/>
+                        <path fill-rule="evenodd" d="M4 5a2 2 0 012-2 3 3 0 003 3h2a3 3 0 003-3 2 2 0 012 2v11a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm3 4a1 1 0 000 2h.01a1 1 0 100-2H7zm3 0a1 1 0 000 2h3a1 1 0 100-2h-3zm-3 4a1 1 0 100 2h.01a1 1 0 100-2H7zm3 0a1 1 0 100 2h3a1 1 0 100-2h-3z" clip-rule="evenodd"/>
+                    </svg>
+                    <span><strong>Authentieke Syrische gerechten</strong> bereid met liefde</span>
+                </p>
+                <p class="flex items-center justify-center gap-3">
+                    <svg class="w-6 h-6 text-jolly-orange flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"/>
+                    </svg>
+                    <span><strong>Verse ingrediënten</strong> dagelijks bereid</span>
+                </p>
+                <p class="flex items-center justify-center gap-3">
+                    <svg class="w-6 h-6 text-jolly-orange flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd"/>
+                    </svg>
+                    <span><strong>Smaakvol & Gezond</strong> voor iedereen</span>
+                </p>
             </div>
             
             <!-- Location -->
-            <div class="text-gray-600">
+            <div class="text-gray-600 mb-8">
                 <div class="flex items-center justify-center gap-2 mb-2">
                     <svg class="w-6 h-6 text-jolly-orange" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                     </svg>
-                    <span class="text-lg md:text-xl font-medium">Locatie</span>
+                    <span class="text-lg md:text-xl font-medium">Bezoek ons</span>
                 </div>
                 <p class="text-lg md:text-xl text-gray-700">
                     Terwaenen 52, 5341 DH Oss
                 </p>
             </div>
+            
+            <!-- Call to action buttons -->
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a 
+                    href={menuUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="bg-jolly-orange text-white px-8 py-4 rounded-xl font-semibold hover:opacity-90 transition-all duration-200 inline-flex items-center justify-center gap-2 shadow-lg hover:shadow-xl"
+                >
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                    </svg>
+                    Bekijk Menu
+                </a>
+                <a 
+                    href="tel:0610963676"
+                    class="bg-white border-2 border-jolly-orange text-jolly-orange px-8 py-4 rounded-xl font-semibold hover:bg-jolly-orange hover:text-white transition-all duration-200 inline-flex items-center justify-center gap-2 shadow-lg hover:shadow-xl"
+                >
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                    </svg>
+                    Bestel Nu
+                </a>
+            </div>
         </div>
         
-        <!-- Call to action -->
+        <!-- Tagline -->
         <p class="text-xl md:text-2xl text-yellow-100 font-medium drop-shadow-md">
             Wij kijken ernaar uit om u te verwelkomen!
         </p>
@@ -103,14 +136,14 @@ const menuUrl = "/menu.pdf";
                 description="Malse gemarineerde kippenvlees met knoflooksaus en augurken"
                 price={6}
                 isPopular={true}
-                imageUrl="https://static.vecteezy.com/ti/gratis-fotos/p2/30516901-rustiek-shoarma-met-frans-patat-paddestoelen-kip-in-pita-brood-foto.jpg"
+                videoUrl="/videos/shoarma.mp4"
                 />
                 <MenuItem 
                 title="Broodje Falafel"
                 description="Heerlijke broodje falafel met verse salade, augurken en tahinisaus"
                 price={6}
                 isVegetarian={true}
-                imageUrl="https://tastythriftytimely.com/wp-content/uploads/2023/06/Falafel-Pita-FEATURED.jpg"
+                videoUrl="/videos/falafel.mp4"
                 />
             </div>
             

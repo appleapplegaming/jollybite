@@ -4,17 +4,28 @@ interface Props {
   description: string;
   price: number;
   imageUrl?: string;
+  videoUrl?: string;
   isPopular?: boolean;
   isVegetarian?: boolean;
 }
 
-const { title, description, price, imageUrl, isPopular = false, isVegetarian = false } = Astro.props;
+const { title, description, price, imageUrl, videoUrl, isPopular = false, isVegetarian = false } = Astro.props;
 ---
 
 <div class="bg-white rounded-2xl shadow-lg overflow-hidden max-w-md mx-auto">
-  <!-- Image Section with Popular Badge -->
+  <!-- Image/Video Section with Popular Badge -->
   <div class="relative h-48 bg-gray-100 flex items-center justify-center">
-    {imageUrl ? (
+    {videoUrl ? (
+      <video 
+        src={videoUrl} 
+        autoplay 
+        loop 
+        muted 
+        playsinline
+        aria-label={title}
+        class="w-full h-full object-cover"
+      />
+    ) : imageUrl ? (
       <img src={imageUrl} alt={title} class="w-full h-full object-cover" />
     ) : (
       <!-- Placeholder icon -->
