@@ -14,7 +14,7 @@ const { title, description, price, imageUrl, videoUrl, isPopular = false, isVege
 
 <div class="bg-white rounded-2xl shadow-lg overflow-hidden max-w-md mx-auto">
   <!-- Image/Video Section with Popular Badge -->
-  <div class="relative h-48 bg-gray-100 flex items-center justify-center">
+  <div class="relative h-100 bg-gray-100 flex items-center justify-center">
     {videoUrl ? (
       <video 
         src={videoUrl} 
@@ -25,7 +25,7 @@ const { title, description, price, imageUrl, videoUrl, isPopular = false, isVege
         preload="metadata"
         aria-label={title}
         class="w-full h-full object-cover"
-        onError="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+        onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
       />
     ) : null}
     {(imageUrl || videoUrl) ? (
