@@ -22,11 +22,19 @@ const { title, description, price, imageUrl, videoUrl, isPopular = false, isVege
         loop 
         muted 
         playsinline
+        preload="metadata"
         aria-label={title}
         class="w-full h-full object-cover"
+        onError="this.style.display='none'; this.nextElementSibling.style.display='flex';"
       />
-    ) : imageUrl ? (
-      <img src={imageUrl} alt={title} class="w-full h-full object-cover" />
+    ) : null}
+    {(imageUrl || videoUrl) ? (
+      <img 
+        src={imageUrl || ''} 
+        alt={title} 
+        class={`w-full h-full object-cover ${videoUrl ? 'hidden' : ''}`}
+        style={videoUrl ? 'display: none;' : ''}
+      />
     ) : (
       <!-- Placeholder icon -->
       <svg class="w-16 h-16 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
